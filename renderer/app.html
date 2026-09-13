@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src https: wss:;" />
+<title>CopyGuard</title>
+<link rel="stylesheet" href="app.css" />
+</head>
+<body>
+<a class="skip-link" href="#page-title">Skip to active workspace</a>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">CG</div><div><div class="brand-name">CopyGuard</div><div class="brand-sub">TRADING INTELLIGENCE</div></div></div>
+    <nav class="nav" id="main-nav" aria-label="CopyGuard workspaces">
+      <div class="nav-group-label">OPERATIONS</div>
+      <button class="nav-item active" data-page="dashboard"><span>▦</span><b>Dashboard</b></button>
+      <button class="nav-item" data-page="feed"><span>◉</span><b>Live Feed</b><i class="nav-badge" id="feed-badge">0</i></button>
+      <button class="nav-item" data-page="wallets"><span>◎</span><b>Wallets</b></button>
+      <button class="nav-item" data-page="positions"><span>↗</span><b>Positions</b></button>
+      <button class="nav-item" data-page="ghost"><span>◌</span><b>Ghost Mode</b><i class="nav-badge ghost" id="ghost-nav-badge">0</i></button>
+      <button class="nav-item" data-page="automation"><span>⚡</span><b>Automation</b><i class="nav-badge auto" id="automation-badge">PAUSED</i></button>
+
+      <div class="nav-group-label">INTELLIGENCE</div>
+      <button class="nav-item" data-page="research"><span>⌕</span><b>Research</b></button>
+      <button class="nav-item" data-page="intelligence"><span>◇</span><b>Intelligence</b></button>
+      <button class="nav-item" data-page="earlybird"><span>✦</span><b>Early Bird</b><i class="nav-badge" id="eb-nav-badge" style="display:none">0</i></button>
+      <button class="nav-item" data-page="leaderboard"><span>♛</span><b>Leaderboard</b></button>
+      <button class="nav-item assistant-nav" data-page="assistant"><span>✦</span><b>AI Assistant</b><em>AI</em></button>
+
+      <div class="nav-group-label">SAFETY &amp; REVIEW</div>
+      <button class="nav-item" data-page="risk"><span>◈</span><b>Risk Center</b><i class="nav-badge risk" id="risk-nav-badge">0</i></button>
+      <button class="nav-item" data-page="notifications"><span>◌</span><b>Events</b><i class="nav-badge notice" id="notification-badge">0</i></button>
+
+      <div class="nav-divider"></div>
+      <div class="nav-group-label">TOOLS &amp; SYSTEM</div>
+      <button class="nav-item padre" data-page="padre"><span>⬡</span><b>Padre Terminal</b><em>LIVE</em></button>
+      <button class="nav-item" data-page="settings"><span>⚙</span><b>Settings</b></button>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="status-row"><span class="status-dot" id="helius-dot"></span><span>Helius</span><strong id="helius-status">Offline</strong></div>
+      <div class="status-row"><span class="status-dot ai live"></span><span>AI</span><strong id="ai-status">—</strong></div>
+      <button class="sidebar-density" id="sidebar-density" aria-pressed="false" title="Toggle compact sidebar"><span>⇤</span><b>Compact sidebar</b></button>
+      <div class="version">COPYGUARD 4.42 · PHASE 65 FINAL PRODUCTION INTEGRATION</div>
+    </div>
+  </aside>
+
+  <main class="main" id="app-main" aria-live="off">
+    <header class="topbar">
+      <div class="page-heading">
+        <div class="breadcrumb"><span>CopyGuard</span><i>/</i><b id="page-breadcrumb">Operations</b></div>
+        <div class="page-title-row"><h1 id="page-title" tabindex="-1">Dashboard</h1><span class="page-phase" id="page-phase">CORE</span></div>
+        <div class="page-context" id="page-context">System-wide operational overview.</div>
+      </div>
+      <div class="top-actions">
+        <button class="quick-switch-trigger" id="quick-switch-btn" title="Quick switch (Ctrl+K)"><span>⌕</span><b>Jump to…</b><kbd>Ctrl K</kbd></button>
+        <div class="global-health-strip" id="global-health-strip" role="status" aria-live="polite">
+          <span><i id="integrity-mini-dot"></i><b>Integrity</b><em id="integrity-mini">—</em></span>
+          <span><i id="connection-mini-dot"></i><b>Network</b><em id="connection-mini">—</em></span>
+        </div>
+        <div class="monitor-pill"><span id="monitor-dot"></span><b id="monitor-label">MONITORING</b></div>
+        <button class="ghost" id="refresh-btn">↻ Refresh</button>
+        <button class="emergency" id="pause-btn" aria-pressed="false">■ Emergency Pause</button>
+      </div>
+    </header>
+
+    <section class="page active dashboard49" id="page-dashboard">
+      <div class="command-hero49">
+        <div class="command-hero-main49">
+          <span class="hero-kicker">LIVE COMMAND CENTER</span>
+          <h2>One screen for the decisions that matter.</h2>
+          <p>Verified performance, Shadow exposure, wallet qualification, risk, system health, AI learning, and current activity—prioritized without mixing simulated and live accounting.</p>
+          <div class="command-hero-actions49">
+            <button class="primary-action" data-jump="feed">Review Live Feed</button>
+            <button class="ghost" data-jump="assistant">Ask AI Assistant</button>
+            <button class="ghost" data-jump="risk">Open Risk Center</button>
+          </div>
+        </div>
+        <div class="command-state49">
+          <div class="command-state-ring49" id="command-state-ring">
+            <span>OPERATING MODE</span>
+            <strong id="hero-state">READY</strong>
+            <small id="hero-sub">Local core online</small>
+          </div>
+          <div class="command-state-lines49">
+            <div><span>Automation</span><b id="command-auto-state">PAUSED</b></div>
+            <div><span>Integrity</span><b id="command-integrity-state">UNKNOWN</b></div>
+            <div><span>Observation</span><b id="command-observation-state">OFFLINE</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="command-metrics49">
+        <article class="command-metric49 emphasis">
+          <div class="command-metric-label49"><span>VERIFIED REALIZED P&amp;L</span><i>↗</i></div>
+          <strong id="metric-verified-pnl">0.0000 SOL</strong>
+          <div class="command-metric-foot49"><span id="metric-verified-outcomes">0 verified closes</span><span id="metric-verified-winrate">0.0% win rate</span></div>
+        </article>
+        <article class="command-metric49">
+          <div class="command-metric-label49"><span>SHADOW EXPOSURE</span><i>◌</i></div>
+          <strong id="metric-shadow-exposure">0.0000 SOL</strong>
+          <div class="command-metric-foot49"><span id="metric-shadow-open">0 open lots</span><span id="metric-shadow-unrealized">0.0000 unrealized</span></div>
+        </article>
+        <article class="command-metric49">
+          <div class="command-metric-label49"><span>WATCHED WALLETS</span><i>◎</i></div>
+          <strong id="metric-wallets">0</strong>
+          <div class="command-metric-foot49"><span id="metric-trusted">0 trusted</span><span id="metric-pending">0 pending</span></div>
+        </article>
+        <article class="command-metric49">
+          <div class="command-metric-label49"><span>TODAY'S SIGNALS</span><i>◉</i></div>
+          <strong id="metric-today">0</strong>
+          <div class="command-metric-foot49"><span id="metric-approved">0 copied</span><span id="metric-blocked">0 blocked</span></div>
+        </article>
+        <article class="command-metric49 compact-only-legacy">
+          <div class="command-metric-label49"><span>OPEN POSITIONS</span><i>↗</i></div>
+          <strong id="metric-positions">0</strong>
+          <div class="command-metric-foot49"><span id="metric-exposure">0.00 SOL tracked</span></div>
+        </article>
+        <article class="command-metric49 compact-only-legacy">
+          <div class="command-metric-label49"><span>AI ENGINE</span><i>◇</i></div>
+          <strong class="metric-text" id="metric-ai">—</strong>
+          <div class="command-metric-foot49"><span id="metric-ai-key">No key detected</span></div>
+        </article>
+      </div>
+
+      <div class="command-grid49 command-grid49-primary">
+        <article class="command-panel49 attention-panel49">
+          <div class="command-panel-head49">
+            <div><span class="panel-kicker">PRIORITY QUEUE</span><h3>Needs Attention</h3><p>Risk, degraded services, and qualification conditions that deserve review.</p></div>
+            <span class="count-pill" id="risk-count">0</span>
+          </div>
+          <div id="command-attention-summary" class="attention-summary49"></div>
+          <div id="promo-alert-strip" class="promo-alert-strip"></div>
+          <div id="risk-list" class="risk-list command-risk-list49"></div>
+          <button class="panel-link49" data-jump="risk">Review all risk evidence →</button>
+        </article>
+
+        <article class="command-panel49 portfolio-panel49">
+          <div class="command-panel-head49">
+            <div><span class="panel-kicker">PORTFOLIO PERFORMANCE</span><h3>Verified vs Marked</h3><p>Closed verified outcomes stay separate from open Shadow marks.</p></div>
+            <span class="status-chip49" id="portfolio-trend-chip">NO HISTORY</span>
+          </div>
+          <div class="portfolio-split49">
+            <div><span>REALIZED</span><strong id="portfolio-realized49">0.0000</strong><small>SOL · source-verified closes</small></div>
+            <div><span>UNREALIZED SHADOW</span><strong id="portfolio-unrealized49">0.0000</strong><small>SOL · current marks only</small></div>
+          </div>
+          <div class="portfolio-detail49">
+            <div><span>Max drawdown</span><b id="portfolio-drawdown49">0.00%</b></div>
+            <div><span>Marked Shadow equity</span><b id="portfolio-equity49">0.0000 SOL</b></div>
+            <div><span>Recent trend</span><b id="portfolio-trend49">INSUFFICIENT HISTORY</b></div>
+          </div>
+          <div class="contributor-list49" id="portfolio-contributors49"></div>
+          <button class="panel-link49" data-jump="positions">Open positions &amp; P&amp;L →</button>
+        </article>
+      </div>
+
+      <div class="command-grid49 command-grid49-secondary">
+        <article class="command-panel49">
+          <div class="command-panel-head49">
+            <div><span class="panel-kicker">LIVE ACTIVITY</span><h3>Trade Stream</h3></div>
+            <button class="text-button" data-jump="feed">Full feed →</button>
+          </div>
+          <div id="recent-activity" class="activity-list command-activity49"></div>
+        </article>
+
+        <article class="command-panel49">
+          <div class="command-panel-head49">
+            <div><span class="panel-kicker">SHADOW QUALIFICATION</span><h3>Promotion Pipeline</h3></div>
+            <button class="text-button" data-jump="ghost">Open Ghost →</button>
+          </div>
+          <div class="ghost-dash-summary command-ghost49">
+            <div class="ghost-dash-stat"><span>TESTING</span><strong id="ghost-dash-testing">0</strong></div>
+            <div class="ghost-dash-stat"><span>QUALIFIED</span><strong id="ghost-dash-qualified" class="positive">0</strong></div>
+            <div class="ghost-dash-stat"><span>LIVE</span><strong id="ghost-dash-live" class="positive">0</strong></div>
+            <div class="ghost-dash-stat"><span>VERIFIED CLOSES</span><strong id="ghost-dash-trades">0</strong></div>
+          </div>
+          <div id="ghost-dash-candidates" class="ghost-dash-candidates"></div>
+        </article>
+
+        <article class="command-panel49">
+          <div class="command-panel-head49">
+            <div><span class="panel-kicker">AI &amp; LEARNING</span><h3>Decision Intelligence</h3></div>
+            <button class="text-button" data-jump="assistant">Open Assistant →</button>
+          </div>
+          <div class="intelligence-status49">
+            <div><span>AI Provider</span><b id="metric-ai-dashboard">—</b><small id="metric-ai-key-dashboard">No key detected</small></div>
+            <div><span>Assistant</span><b id="assistant-ready49">GOVERNED</b><small id="assistant-sessions49">0 sessions</small></div>
+            <div><span>Learning links</span><b id="learning-links49">0</b><small id="learning-proposals49">0 advisory proposals</small></div>
+            <div><span>Logic audit</span><b id="assistant-audit49">UNKNOWN</b><small>Phase 47 authority audit</small></div>
+          </div>
+        </article>
+
+        <article class="command-panel49">
+          <div class="command-panel-head49">
+            <div><span class="panel-kicker">SYSTEM HEALTH</span><h3>Core Services</h3></div>
+            <button class="text-button" data-jump="settings">Connections →</button>
+          </div>
+          <div class="service-list command-services49" id="service-list"></div>
+        </article>
+      </div>
+
+      <div class="command-grid49 command-grid49-tertiary">
+        <article class="command-panel49">
+          <div class="command-panel-head49"><div><span class="panel-kicker">WALLET MIX</span><h3>Trust Distribution</h3></div><button class="text-button" data-jump="wallets">Manage →</button></div>
+          <div class="tier-bars" id="tier-bars"></div>
+        </article>
+        <article class="command-panel49">
+          <div class="command-panel-head49"><div><span class="panel-kicker">AUTOMATION</span><h3>Trusted Copy Rules</h3></div><button class="text-button" data-jump="automation">Manage →</button></div>
+          <div class="automation-card command-automation49"><div><span>GLOBAL AUTO EXECUTE</span><strong id="auto-state">OFF</strong></div><div><span>MAX GLOBAL SIZE</span><strong id="max-sol">2.00 SOL</strong></div><div><span>CONFIGURED TRUSTED</span><strong id="trusted-configs">0</strong></div><div><span>TODAY'S AUTO TRADES</span><strong id="daily-auto">0</strong></div></div>
+        </article>
+        <article class="command-panel49 production65-panel">
+          <div class="command-panel-head49"><div><span class="panel-kicker">PHASE 65 · FINAL INTEGRATION</span><h3>Production Readiness Audit</h3><p>Runtime verification across execution, accounting, risk, assistant, qualification and recovery boundaries.</p></div><button class="text-button" id="production-audit-run65">Run Audit ↻</button></div>
+          <div class="production65-status"><strong id="production-audit-status65">UNKNOWN</strong><span id="production-audit-summary65">Audit not loaded</span></div>
+          <div class="production65-checks" id="production-audit-checks65"></div>
+          <div class="production65-boundary">This audit is read-only. It cannot execute trades, promote wallets, override risk, or commit accounting state.</div>
+        </article>
+      </div>
+    </section>
+    <section class="page feed-page feed50" id="page-feed">
+      <div class="feed-hero feed-hero50">
+        <div>
+          <span class="hero-kicker">LIVE WALLET ACTIVITY · PHASE 50 REVIEW SURFACE</span>
+          <h2>Trade Review Command Feed</h2>
+          <p>Read the source transaction first: chain time, observation latency, execution-price evidence, current market mark, deterministic risk, and AI advice are separated so a fast feed never hides what is authoritative.</p>
+        </div>
+        <div class="feed-live-state feed-live-state50"><span class="pulse-dot"></span><div><b id="feed-live-label">MONITORING</b><small id="feed-live-sub">Waiting for wallet activity</small></div></div>
+      </div>
+
+      <div class="feed-summary feed-summary50" id="feed-summary"></div>
+
+      <div class="feed-toolbar feed-toolbar50">
+        <div class="feed-search"><span>⌕</span><input id="feed-search" placeholder="Search token, symbol, wallet, signature or address…" autocomplete="off"></div>
+        <div class="feed-filters" id="feed-filters">
+          <button class="filter-btn active" data-feed-filter="all">All</button>
+          <button class="filter-btn" data-feed-filter="pending">Needs Action</button>
+          <button class="filter-btn" data-feed-filter="buy">Buys</button>
+          <button class="filter-btn" data-feed-filter="sell">Sells</button>
+          <button class="filter-btn" data-feed-filter="risk">Risk Flags</button>
+          <button class="filter-btn" data-feed-filter="decided">Decided</button>
+        </div>
+        <select id="feed-sort" class="feed-sort" aria-label="Sort trade feed">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="size">Largest Size</option>
+          <option value="risk">Highest Risk</option>
+        </select>
+      </div>
+
+      <div id="promo-banners" class="promo-banners"></div>
+
+      <div class="feed-layout feed-layout50">
+        <div class="trade-feed trade-feed50" id="trade-feed"></div>
+        <aside class="feed-side feed-side50">
+          <div class="feed-side-card feed-side-priority50">
+            <div class="panel-head"><div><span class="panel-kicker">REVIEW QUEUE</span><h3>Needs Decision</h3></div><span class="count-pill" id="feed-queue-count">0</span></div>
+            <div id="feed-queue"></div>
+          </div>
+
+          <div class="feed-side-card">
+            <div class="panel-head"><div><span class="panel-kicker">SOURCE HEALTH</span><h3>Observation Quality</h3></div></div>
+            <div id="feed-latency-summary" class="feed-evidence-summary50"></div>
+          </div>
+
+          <div class="feed-side-card">
+            <div class="panel-head"><div><span class="panel-kicker">RISK SIGNALS</span><h3>Current Flags</h3></div></div>
+            <div id="feed-risk-signals"></div>
+          </div>
+
+          <div class="feed-side-card">
+            <div class="panel-head"><div><span class="panel-kicker">EXECUTION DOCTRINE</span><h3>What Copy Means</h3></div></div>
+            <div id="feed-execution-summary" class="execution-doctrine50">
+              <div><span>MANUAL COPY</span><b>PREPARE ONLY</b></div>
+              <div><span>FINAL PADRE CONFIRM</span><b>MANUAL</b></div>
+              <div><span>HARD BLOCK</span><b>AUTHORITATIVE</b></div>
+              <div><span>AI ADVICE</span><b>ADVISORY</b></div>
+            </div>
+            <p class="feed-doctrine-note50">A prepared trade is not a fill, position, or realized P&amp;L. Padre submit and blockchain settlement remain distinct states.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+    <section class="page wallets-page" id="page-wallets">
+      <div class="wallets-hero wallets-hero51">
+        <div><span class="hero-kicker">WALLET OPERATIONS · VERIFIED QUALIFICATION</span><h2>Wallet Qualification Console</h2><p>Inspect source-verified performance, deterministic Shadow thresholds, dynamic health, discovery provenance, risk history, and trust controls from one wallet profile.</p></div>
+        <div class="wallet-hero-actions51"><div class="wallet-qualification-legend51"><span><i class="testing"></i>Testing</span><span><i class="qualified"></i>Qualified</span><span><i class="warning"></i>Warning</span><span><i class="paused"></i>Auto-paused</span></div><button class="primary-action" id="add-wallet-btn">＋ Add Wallet</button></div>
+      </div>
+
+      <div class="wallet-summary" id="wallet-summary"></div>
+
+      <div class="wallet-toolbar">
+        <div class="wallet-search"><span>⌕</span><input id="wallet-search" placeholder="Search label or wallet address…" autocomplete="off"></div>
+        <div class="wallet-filters" id="wallet-filters">
+          <button class="filter-btn active" data-tier="all">All</button>
+          <button class="filter-btn" data-tier="trusted">Trusted</button>
+          <button class="filter-btn" data-tier="pending">Pending</button>
+          <button class="filter-btn" data-tier="ghost">Ghost</button>
+          <button class="filter-btn" data-tier="paused">Paused</button>
+          <button class="filter-btn" data-tier="blacklisted">Blacklisted</button>
+        </div>
+        <select id="wallet-sort" class="wallet-sort" aria-label="Sort wallets">
+          <option value="recent">Recently Added</option>
+          <option value="pnl">Highest P&amp;L</option>
+          <option value="winrate">Highest Win Rate</option>
+          <option value="trades">Most Trades</option>
+          <option value="name">Name</option>
+        </select>
+      </div>
+
+      <div class="wallet-layout">
+        <div class="wallet-list-panel">
+          <div id="wallet-list" class="wallet-list"></div>
+        </div>
+        <aside class="wallet-detail" id="wallet-detail">
+          <div class="wallet-detail-empty"><span>◎</span><b>Select a wallet</b><small>Choose a wallet to inspect its profile, performance and controls.</small></div>
+        </aside>
+      </div>
+    </section>
+    <section class="page ghost16-page ghost53" id="page-ghost">
+      <div class="ghost53-hero">
+        <div>
+          <span class="hero-kicker">SHADOW LAB · VERIFIED QUALIFICATION</span>
+          <h2>Ghost / Shadow Qualification Lab</h2>
+          <p>Simulate observed wallet behavior with transaction-linked entries, fees, slippage, partial exits, current market marks, verified closes, and deterministic promotion thresholds before real automation is eligible.</p>
+          <div class="ghost53-doctrine"><span>SIMULATED CAPITAL</span><span>FULLY CLOSED OUTCOMES COUNT</span><span>HARD BLOCKS ALWAYS WIN</span><span>PROMOTION IS EXPLICIT</span></div>
+        </div>
+        <div class="ghost53-state-map">
+          <span>LIFECYCLE</span>
+          <div><b>PENDING</b><i>→</i><b>SHADOW TESTING</b><i>→</i><b>QUALIFIED</b><i>→</i><b>LIVE HEALTHY</b></div>
+          <small>WARNING / AUTO_PAUSED / REQUALIFYING return through Shadow before any later manual promotion.</small>
+        </div>
+      </div>
+      <div class="ghost16-summary ghost53-summary" id="ghost16-summary"></div>
+      <div class="ghost16-toolbar ghost53-toolbar">
+        <div class="wallet-search"><span>⌕</span><input id="ghost16-search" placeholder="Search Shadow wallet, status, or address…" autocomplete="off"></div>
+        <select id="ghost16-filter" class="wallet-sort"><option value="all">All Shadow Profiles</option><option value="testing">Testing</option><option value="qualified">Qualified</option><option value="live">Live Activated</option><option value="warning">Warning</option><option value="auto_paused">Auto Paused</option><option value="requalifying">Requalifying</option><option value="stopped">Stopped</option></select>
+        <button class="primary-action" id="ghost16-add">＋ Start Shadow Test</button>
+      </div>
+      <div class="ghost53-layout">
+        <section class="ghost16-list-panel ghost53-list-panel">
+          <div class="panel-head"><div><span class="panel-kicker">QUALIFICATION PIPELINE</span><h3>Wallet Lab Queue</h3></div><span class="count-pill" id="ghost16-count">0</span></div>
+          <div id="ghost16-list"></div>
+        </section>
+        <aside class="ghost16-detail ghost53-detail" id="ghost16-detail"><div class="wallet-detail-empty"><span>◌</span><b>Select a Shadow wallet</b><small>Inspect lot-level performance, exact qualification thresholds, verified outcomes, dynamic health and source evidence.</small></div></aside>
+      </div>
+      <div class="ghost53-evidence-grid">
+        <section class="panel ghost16-ledger-panel"><div class="panel-head"><div><span class="panel-kicker">SIMULATION LEDGER</span><h3>Shadow Actions &amp; Partial Exits</h3></div><span class="count-pill" id="ghost16-ledger-count">0</span></div><div id="ghost16-ledger"></div></section>
+        <section class="panel ghost16-ledger-panel"><div class="panel-head"><div><span class="panel-kicker">SOURCE EVIDENCE</span><h3>Timestamped Transactions</h3></div><span class="count-pill" id="ghost19-tx-count">0</span></div><div id="ghost19-transactions"></div></section>
+      </div>
+    </section>
+    <section class="page positions-page positions52" id="page-positions">
+      <div class="positions-hero positions-hero52">
+        <div><span class="hero-kicker">PORTFOLIO ACCOUNTING · VERIFIED OUTCOMES</span><h2>Positions &amp; Portfolio Accounting</h2><p>Keep every state distinct: simulated Shadow lots, partial realizations, manual preparations, submitted-unverified attempts, operational records, and source-verified completed outcomes.</p></div>
+        <div class="positions-hero-actions"><button class="ghost" id="positions-refresh">↻ Refresh Accounting</button><button class="ghost" id="positions-export">⇩ Export CSV</button></div>
+      </div>
+
+      <div class="accounting-doctrine52">
+        <div><span>VERIFIED REALIZED</span><b>FULLY CLOSED + SOURCE VERIFIED</b></div>
+        <div><span>SHADOW OPEN</span><b>SIMULATED / MARKED ONLY</b></div>
+        <div><span>PREPARED</span><b>NO ACCOUNTING COMMIT</b></div>
+        <div><span>SUBMITTED</span><b>UNVERIFIED UNTIL SETTLED</b></div>
+      </div>
+
+      <div class="positions-summary positions-summary52" id="positions-summary"></div>
+
+      <div class="positions-toolbar positions-toolbar52">
+        <div class="positions-tabs" id="positions-tabs">
+          <button class="filter-btn active" data-pos-tab="verified">Verified Outcomes</button>
+          <button class="filter-btn" data-pos-tab="shadow">Open Shadow</button>
+          <button class="filter-btn" data-pos-tab="execution">Execution States</button>
+          <button class="filter-btn" data-pos-tab="operational">Operational</button>
+        </div>
+        <div class="positions-search"><span>⌕</span><input id="positions-search" placeholder="Search wallet, token, signature or state…" autocomplete="off"></div>
+        <select id="positions-sort" class="wallet-sort"><option value="recent">Most Recent</option><option value="pnl">Best P&amp;L</option><option value="size">Largest Size</option><option value="age">Longest Held</option></select>
+      </div>
+
+      <div class="positions-layout positions-layout52">
+        <section class="positions-book">
+          <div class="panel-head"><div><span class="panel-kicker">ACCOUNTING LEDGER</span><h3 id="positions-book-title">Verified Outcomes</h3></div><span class="count-pill" id="positions-count">0</span></div>
+          <div id="positions-list" class="positions-list positions-list52"></div>
+        </section>
+        <aside class="positions-side positions-side52">
+          <div class="positions-side-card" id="position-detail"><div class="position-detail-empty"><span>↗</span><b>Select an accounting record</b><small>Inspect source transactions, prices, cost basis, partial exits and state semantics.</small></div></div>
+          <div class="positions-side-card"><div class="panel-head"><div><span class="panel-kicker">VERIFIED PERFORMANCE</span><h3>Portfolio Stats</h3></div></div><div id="positions-performance"></div></div>
+          <div class="positions-side-card"><div class="panel-head"><div><span class="panel-kicker">ATTRIBUTION</span><h3>Top Contributors</h3></div></div><div id="positions-attribution52"></div></div>
+          <div class="positions-side-card positions-note"><b>ACCOUNTING MODEL</b><p>Only fully closed, source-verified Shadow outcomes count as verified realized performance. Open Shadow marks, prepared trades, submitted-unverified attempts, and legacy operational records stay separate.</p></div>
+        </aside>
+      </div>
+    </section>
+    <section class="page automation-page automation54" id="page-automation">
+      <div class="automation-hero automation-hero54">
+        <div><span class="hero-kicker">TRUSTED EXECUTION · PHASE 32 SAFETY ENFORCED</span><h2>Automation Control Center</h2><p>Arm Trusted automation only when system health, qualification, deterministic risk, market freshness, and per-wallet limits all pass. Emergency pause remains the highest-priority operator control.</p></div>
+        <div class="automation-master automation-master54" id="automation-master-card">
+          <span>MASTER EXECUTION STATE</span><strong id="automation-master-state">PAUSED</strong><small id="automation-master-sub">Emergency lock is active</small>
+          <div class="automation-master-actions"><button id="automation-toggle-enabled" class="ghost">Enable Auto Execute</button><button id="automation-emergency" class="emergency">■ Emergency Pause</button></div>
+        </div>
+      </div>
+
+      <div class="automation-safety-strip54">
+        <div><span>EMERGENCY PAUSE</span><b id="automation54-pause">ACTIVE</b></div>
+        <div><span>SYSTEM MODE</span><b id="automation54-system-mode">STARTING</b></div>
+        <div><span>OBSERVATION</span><b id="automation54-observation">UNKNOWN</b></div>
+        <div><span>MARKET DATA</span><b id="automation54-market">UNKNOWN</b></div>
+        <div><span>PADRE</span><b id="automation54-padre">UNKNOWN</b></div>
+        <div><span>PHASE 32</span><b id="automation54-exec-safety">READY</b></div>
+      </div>
+
+      <div class="automation-summary automation-summary54" id="automation-summary"></div>
+
+      <div class="automation-layout automation-layout54">
+        <section class="automation-wallet-panel automation-wallet-panel54">
+          <div class="panel-head"><div><span class="panel-kicker">TRUSTED WALLETS</span><h3>Live Automation Profiles</h3></div><span class="count-pill" id="automation-wallet-count">0</span></div>
+          <div class="automation-wallet-list" id="automation-wallet-list"></div>
+        </section>
+
+        <aside class="automation-config-panel automation-config-panel54" id="automation-config-panel">
+          <div class="automation-empty"><span>⚡</span><b>Select a trusted wallet</b><small>Inspect qualification health, limits, sizing, AI gates, and exit protection before enabling its profile.</small></div>
+        </aside>
+
+        <aside class="automation-safety-panel54">
+          <div class="automation-side-card54">
+            <div class="panel-head"><div><span class="panel-kicker">EXECUTION SAFETY</span><h3>Recent Phase 32 States</h3></div></div>
+            <div id="automation-execution54"></div>
+          </div>
+          <div class="automation-side-card54">
+            <div class="panel-head"><div><span class="panel-kicker">LIVE ELIGIBILITY</span><h3>System Gate Stack</h3></div></div>
+            <div id="automation-gates54"></div>
+          </div>
+          <div class="automation-side-card54 automation-doctrine54">
+            <b>AUTOMATION DOCTRINE</b>
+            <p>Trusted status never overrides deterministic risk. AI is advisory or an optional extra gate. Recovered/stale signals do not execute live. Automated SELL remains fail-closed until own-wallet holding/fill evidence is authoritative.</p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="automation-global-panel automation-global-panel54">
+        <div class="panel-head"><div><span class="panel-kicker">GLOBAL GUARDRAILS</span><h3>System-Wide Limits</h3></div><span class="status-chip49" id="automation54-global-status">MANUAL</span></div>
+        <div class="automation-global-grid automation-global-grid54">
+          <label><span>MAX SOL / TRADE</span><input id="automation-global-max-sol" type="number" min="0.01" step="0.01"></label>
+          <label><span>MAX AUTOMATION RISK SCORE</span><input id="automation-global-risk" type="number" min="0" max="100" step="1"></label>
+          <div class="automation-rule-note"><b>HARD BLOCKS ALWAYS WIN</b><p>Deterministic Risk Engine v3 and Phase 32 execution safety remain authoritative regardless of AI opinion, wallet trust, or operator profile settings.</p></div>
+          <button class="primary-action" id="automation-save-global">SAVE GLOBAL LIMITS</button>
+        </div>
+      </div>
+    </section>
+    <section class="page research-page research55" id="page-research">
+      <div class="research-hero research-hero55">
+        <div><span class="hero-kicker">TOKEN EVIDENCE LAB · PHASE 25 + RISK ENGINE V3</span><h2>Research Center</h2><p>Resolve the exact Solana contract, inspect market and on-chain evidence, expose unknowns, and keep deterministic risk authoritative before any Padre review.</p></div>
+        <div class="research-status research-status55"><span>RESEARCH STACK</span><strong>DEX + HELIUS + EVIDENCE V3 + AI</strong><small id="research-status-text">Ready for a search</small></div>
+      </div>
+
+      <form class="research-searchbar research-searchbar55" id="research-form">
+        <span>⌕</span><input id="research-query" autocomplete="off" spellcheck="false" placeholder="Ticker, token name, or exact Solana contract address…"><button type="submit" id="research-search-btn">INVESTIGATE</button>
+      </form>
+      <div class="research-chips"><button data-rq="BONK">BONK</button><button data-rq="WIF">WIF</button><button data-rq="POPCAT">POPCAT</button><span>Exact contract searches take priority. Similar tickers are comparison evidence, not identity proof.</span></div>
+
+      <div class="research-summary research-summary55" id="research-summary"></div>
+
+      <div class="research-grid research-grid55">
+        <section class="research-results-panel research-results-panel55">
+          <div class="panel-head"><div><span class="panel-kicker">CONTRACT RESOLUTION</span><h3>Solana Candidates</h3></div><span class="count-pill" id="research-count">0</span></div>
+          <div class="research-resolution-note55"><b>VERIFY THE MINT, NOT THE TICKER</b><span>CopyGuard ranks candidates from returned evidence. “Likely original” is provenance evidence, never cryptographic identity proof.</span></div>
+          <div id="research-results" class="research-results"><div class="research-empty"><span>⌕</span><b>Investigate a token</b><small>Search above or send a contract here from the Live Feed.</small></div></div>
+        </section>
+
+        <section class="research-evidence-panel55">
+          <div class="research-side-card research-detail55" id="research-detail"><div class="research-detail-empty"><span>◈</span><b>No token selected</b><small>Select a contract to inspect market state, authorities, Token-2022 restrictions, holders, provenance, and deterministic risk.</small></div></div>
+        </section>
+
+        <aside class="research-side research-side55">
+          <div class="research-side-card"><div class="panel-head"><div><span class="panel-kicker">DETERMINISTIC AUTHORITY</span><h3>Decision Boundary</h3></div></div><div id="research-authority55"><div class="empty-state compact"><b>No evidence loaded</b><span>Hard blocks and unknowns will appear here.</span></div></div></div>
+          <div class="research-side-card"><div class="panel-head"><div><span class="panel-kicker">AI RESEARCH ASSISTANT</span><h3>Evidence-Limited Opinion</h3></div></div><div id="research-ai"><div class="empty-state compact"><b>Waiting for search</b><span>AI may interpret evidence but cannot override deterministic risk.</span></div></div></div>
+          <div class="research-side-card"><div class="panel-head"><div><span class="panel-kicker">TOKEN WATCHLIST</span><h3>Saved Research</h3></div><span class="count-pill" id="research-watch-count">0</span></div><div id="research-watchlist"></div></div>
+          <div class="research-side-card research-doctrine55"><b>RESEARCH ≠ EXECUTION</b><p>Opening a contract in Padre is a review handoff only. Research never final-submits a trade, marks a token safe, or overrides a deterministic hard block.</p></div>
+        </aside>
+      </div>
+    </section>
+    <section class="page intelligence-page intel56" id="page-intelligence">
+      <div class="intel-hero intel-hero56"><div><span class="hero-kicker">INTELLIGENCE OPERATIONS · PHASES 27–29</span><h2>Intelligence Center</h2><p>Separate discovery evidence from trust: review repeatability, early-entry timing, cluster overlap, health degradation, learning correlations, Shadow routing, and investigation handoffs without promoting candidates directly to Trusted.</p></div><div class="intel-hero-actions"><button class="ghost" id="intel-health-now">♡ Health Check</button><button class="primary-action" id="intel-scan-now">◇ Run Discovery Scan</button></div></div>
+      <div class="intel-summary intel-summary56" id="intel-summary"></div>
+      <div class="intel-tabs intel-tabs56" id="intel-tabs"><button class="filter-btn active" data-intel-tab="discover">Discovery</button><button class="filter-btn" data-intel-tab="health">Health</button><button class="filter-btn" data-intel-tab="watchlist">Watchlist</button><button class="filter-btn" data-intel-tab="signals">Signals</button></div>
+      <div class="intel-layout intel-layout56">
+        <section class="intel-main-panel intel-main-panel56"><div class="panel-head"><div><span class="panel-kicker" id="intel-kicker">PHASE 27 · REPEATABILITY DISCOVERY</span><h3 id="intel-title">Wallet Candidates</h3></div><span class="count-pill" id="intel-count">0</span></div><div id="intel-content"></div></section>
+        <aside class="intel-detail56" id="intel-detail56"><div class="intel-detail-empty56"><span>◇</span><b>Select intelligence evidence</b><small>Inspect candidate repeatability, cluster context, source token appearances, health alerts, or signals.</small></div></aside>
+        <aside class="intel-side intel-side56">
+          <div class="intel-side-card"><div class="panel-head"><div><span class="panel-kicker">DISCOVERY ENGINE</span><h3>Phase 27 Status</h3></div></div><div id="intel-engine-status"></div></div>
+          <div class="intel-side-card"><div class="panel-head"><div><span class="panel-kicker">Closed-Loop Learning</span><h3>Phase 29 Evidence</h3></div></div><div id="intel-learning-status"></div></div>
+          <div class="intel-side-card"><div class="panel-head"><div><span class="panel-kicker">RECENT SCANS</span><h3>Discovery Runs</h3></div></div><div id="intel-runs56"></div></div>
+          <div class="intel-side-card intel-note"><b>DISCOVERY IS NOT TRUST</b><p>SHADOW_READY means the repeatability gate passed and the wallet may be paper-tested. It never means Trusted. Cluster penalties and one-hit rejection remain visible, and only explicit later qualification can reach Trusted review.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="page risk12-page risk58-page" id="page-risk">
+      <div class="risk12-hero risk58-hero"><div><span class="hero-kicker">PHASE 26 · DETERMINISTIC RISK ENGINE V3</span><h2>Risk Forensics Center</h2><p>Trace exactly why CopyGuard passes, cautions, or hard-blocks a token. Deterministic evidence remains authoritative; AI may explain evidence but can never waive a block.</p></div><div class="risk58-authority"><span>FINAL SAFETY AUTHORITY</span><strong>DETERMINISTIC V3</strong><small id="risk12-helius">Holder ownership checks Helius when available</small></div></div>
+      <div class="risk58-doctrine"><div><span>PASS</span><b>No deterministic blocker detected</b></div><div><span>CAUTION</span><b>Review required / risk ceiling applies</b></div><div><span>HARD BLOCK</span><b>Execution preparation stops</b></div><div><span>UNKNOWN</span><b>Missing evidence stays unresolved</b></div><div><span>AI ROLE</span><b>Explain only · never override</b></div></div>
+      <div class="risk12-summary risk58-summary" id="risk12-summary"></div>
+      <form class="risk12-scan risk58-scan" id="risk12-form"><span>◈</span><input id="risk12-mint" placeholder="Paste an exact Solana mint for deterministic forensic scan…" autocomplete="off" spellcheck="false"><button type="submit" class="primary-action">RUN FORENSIC SCAN</button></form>
+      <div class="risk58-layout">
+        <section class="risk12-main risk58-ledger"><div class="panel-head"><div><span class="panel-kicker">PERSISTENT DECISION / EVENT LEDGER</span><h3>Recent Elevated Assessments</h3></div><div class="risk12-actions"><select id="risk12-filter" class="wallet-sort"><option value="all">All Levels</option><option value="critical">Critical</option><option value="high">High</option><option value="medium">Medium</option></select><button class="text-button" id="risk12-clear">Clear Event Ledger</button></div></div><div id="risk12-events"></div></section>
+        <section class="risk58-investigation" id="risk12-scan-result"><div class="position-detail-empty"><span>◈</span><b>No token scanned</b><small>Run a scan to inspect deterministic decision, component evidence, hard blocks, cautions, unknowns, provenance, holder ownership, creator evidence and AI explanation.</small></div></section>
+        <aside class="risk12-side risk58-side">
+          <div class="risk12-card"><div class="panel-head"><div><span class="panel-kicker">COMMON SIGNALS</span><h3>Observed Risk Patterns</h3></div></div><div id="risk12-top-flags"></div></div>
+          <div class="risk12-card"><div class="panel-head"><div><span class="panel-kicker">ENGINE WEIGHTS</span><h3>Deterministic Components</h3></div></div><div class="risk58-weight-note">V3 score combines token control, market/liquidity, ownership, creator, manipulation, coordination, wallet quality, provenance and exposure. A hard-block condition overrides score weighting.</div><div class="risk12-model risk58-model"><div><b>22%</b><span>Token Control</span></div><div><b>15%</b><span>Market</span></div><div><b>14%</b><span>Holders</span></div><div><b>13%</b><span>Creator</span></div><div><b>12%</b><span>Coordination</span></div><div><b>11%</b><span>Manipulation</span></div><div><b>6%</b><span>Wallet</span></div><div><b>4%</b><span>Provenance</span></div><div><b>3%</b><span>Exposure</span></div></div></div>
+          <div class="risk12-card risk58-boundary"><b>NON-OVERRIDABLE BOUNDARY</b><p>Freeze authority, mint authority, Token-2022 restrictions, severe liquidity traps, concentrated ownership and other deterministic hard-block evidence cannot be cleared by AI or a positive wallet history.</p></div>
+        </aside>
+      </div>
+    </section><section class="page earlybird-page earlybird57" id="page-earlybird">
+      <div class="eb11-hero eb57-hero">
+        <div><span class="hero-kicker">PHASE 24 · LAUNCH RECONSTRUCTION + EARLY BUYER EVIDENCE</span><h2>Early Bird Intelligence</h2><p>Reconstruct launch anchors, identify actual early inbound buyers, compare entry rank and timing across independent token runs, and route repeatable candidates into Shadow testing — never directly into Trusted execution.</p></div>
+        <div class="eb11-hero-actions"><div class="eb11-scan-state"><span id="eb11-status-dot"></span><div><b id="eb11-status">READY</b><small id="eb11-last-scan">No completed scan yet</small></div></div><button class="primary-action" id="eb11-scan">✦ Scan Now</button></div>
+      </div>
+      <div class="eb57-doctrine">
+        <div><span>ENTRY TRUTH</span><b>Actual inbound transfer evidence</b></div><div><span>LAUNCH TIME</span><b>Reconstructed anchor + confidence</b></div><div><span>PRICE TRUTH</span><b>Historical entry evidence when available</b></div><div><span>OUTCOME TRUTH</span><b>Observed run estimate ≠ historical peak</b></div><div><span>ROUTING · SHADOW ONLY</span><b>Qualified signal → Shadow only</b></div>
+      </div>
+      <div class="eb11-progress-wrap" id="eb11-progress-wrap"><div class="eb11-progress"><i id="eb11-progress-bar"></i></div><span id="eb11-progress-text">Ready</span></div>
+      <div class="eb11-summary eb57-summary" id="eb11-summary"></div>
+      <div class="eb11-toolbar eb57-toolbar"><div class="intel-tabs" id="eb11-tabs"><button class="filter-btn active" data-eb-tab="candidates">Candidates</button><button class="filter-btn" data-eb-tab="watched">Shadow / Monitored</button><button class="filter-btn" data-eb-tab="runs">Run Evidence</button><button class="filter-btn" data-eb-tab="dismissed">Dismissed</button></div><div class="eb11-controls"><div class="positions-search"><span>⌕</span><input id="eb11-search" placeholder="Wallet, token, mint, signature…" autocomplete="off"></div><select id="eb11-class" class="wallet-sort"><option value="all">All Classes</option><option value="ELITE">Elite</option><option value="STRONG">Strong</option><option value="NOTABLE">Notable</option><option value="WATCH">Watch</option><option value="SPRAY">Spray</option></select><select id="eb11-sort" class="wallet-sort"><option value="score">Highest Score</option><option value="rank">Earliest Entry</option><option value="multiple">Best Observed Run</option><option value="consistency">Most Independent Runs</option><option value="recent">Recently Updated</option></select></div></div>
+      <div class="eb57-layout">
+        <section class="eb11-main eb57-main"><div class="panel-head"><div><span class="panel-kicker" id="eb11-kicker">CANDIDATE EVIDENCE</span><h3 id="eb11-title">Repeat Early-Entry Wallets</h3></div><span class="count-pill" id="eb11-count">0</span></div><div id="eb11-content"></div></section>
+        <section class="eb57-inspector" id="eb57-inspector"><div class="position-detail-empty"><span>✦</span><b>Select an Early Bird candidate</b><small>Inspect every retained early-entry event, source signature, launch anchor, historical entry price evidence, AI interpretation, and Shadow routing state.</small></div></section>
+        <aside class="eb11-side eb57-side">
+          <div class="intel-side-card"><div class="panel-head"><div><span class="panel-kicker">RECONSTRUCTION ENGINE</span><h3>Evidence Status</h3></div></div><div id="eb57-reconstruction"></div></div>
+          <div class="intel-side-card"><div class="panel-head"><div><span class="panel-kicker">LATEST QUALIFIERS</span><h3>Observed Strong Runs</h3></div></div><div id="eb11-run-strip"></div></div>
+          <div class="intel-side-card"><div class="panel-head"><div><span class="panel-kicker">SCAN LEDGER</span><h3>Recent Scans</h3></div></div><div id="eb11-history"></div></div>
+          <div class="intel-side-card intel-note"><b>EARLY ≠ CERTAIN</b><p>Early-entry behavior does not prove inside information or future profitability. Historical entry prices may be known while historical peak price is unavailable. Promotion requires separate Shadow qualification.</p></div>
+        </aside>
+      </div>
+    </section>
+    <section class="page leaderboard-page leader63-page" id="page-leaderboard">
+      <div class="leader63-hero"><div><span class="hero-kicker">PHASE 63 · VERIFIED WALLET PERFORMANCE</span><h2>Wallet Performance Leaderboard</h2><p>Rank monitored wallets using fully closed, source-verified outcomes, repeatability and risk context. Open Shadow marks and legacy wallet stats are shown separately and never inflate verified ranking performance.</p></div><div class="leader63-authority"><span>RANKING AUTHORITY</span><strong>EVIDENCE ONLY</strong><small>Rank ≠ Trusted · Rank ≠ live execution · Promotion remains a separate qualification decision.</small></div></div>
+      <div class="leader63-doctrine"><div><span>VERIFIED PERFORMANCE</span><b>Fully closed + source-verified only</b></div><div><span>SHADOW CONTEXT</span><b>Open/partial marks remain separate</b></div><div><span>REPEATABILITY</span><b>Independent-token appearances matter</b></div><div><span>RISK</span><b>Hard blocks remain visible</b></div><div><span>TRUST</span><b>Ranking never auto-promotes</b></div></div>
+      <div class="leader-summary leader63-summary" id="leader-summary"></div>
+      <div class="leader63-toolbar"><div class="positions-search"><span>⌕</span><input id="leader-search" placeholder="Search wallet or label…" autocomplete="off"></div><select id="leader-tier" class="wallet-sort"><option value="all">All Tiers</option><option value="trusted">Trusted</option><option value="ghost">Shadow</option><option value="pending">Pending</option><option value="paused">Paused</option><option value="blacklisted">Blacklisted</option></select><select id="leader63-sort" class="wallet-sort"><option value="score">Evidence Score</option><option value="pnl">Verified P&amp;L</option><option value="winrate">Verified Win Rate</option><option value="trades">Verified Closes</option><option value="repeatability">Repeatability</option><option value="drawdown">Lowest Drawdown</option></select><button class="ghost" id="leader-refresh">↻ Refresh Evidence</button></div>
+      <div class="leader63-layout">
+        <section class="leader63-board"><div class="leader63-head"><span>RANK</span><span>WALLET</span><span>EVIDENCE SCORE</span><span>VERIFIED WR</span><span>VERIFIED CLOSES</span><span>VERIFIED P&amp;L</span><span>REPEAT</span><span>RISK</span><span>STATE</span></div><div id="leader-list"></div></section>
+        <aside class="leader63-detail" id="leader63-detail"><div class="position-detail-empty"><span>♛</span><b>Select a wallet</b><small>Inspect verified outcomes, repeatability, Shadow qualification, risk context and trust state.</small></div></aside>
+      </div>
+    </section>
+    </section>
+
+    <section class="page notify13-page events59-page" id="page-notifications">
+      <div class="notify13-hero events59-hero"><div><span class="hero-kicker">PHASE 59 · UNIFIED SYSTEM EVIDENCE LEDGER</span><h2>Events & System Evidence Center</h2><p>A chronological forensic timeline connecting chain observation, deterministic risk, Shadow qualification, automation, Phase 32 execution safety, integrity/recovery, connection health, intelligence and advisory AI activity.</p></div><div class="events59-live"><span>EVIDENCE BUS</span><strong>RECORDING</strong><small>Event recorded ≠ trade submitted ≠ settled ≠ verified realized outcome.</small></div></div>
+      <div class="events59-doctrine"><div><span>OBSERVED</span><b>Source activity recorded</b></div><div><span>PREPARED</span><b>No submission / no accounting</b></div><div><span>SUBMITTED_UNVERIFIED</span><b>Submission evidence only</b></div><div><span>SETTLED</span><b>Requires authoritative wallet evidence</b></div><div><span>VERIFIED OUTCOME</span><b>Separate fully closed accounting proof</b></div></div>
+      <div class="notify13-summary events59-summary" id="notify13-summary"></div>
+      <div class="events59-health" id="events59-health"></div>
+      <div class="notify13-toolbar events59-toolbar"><div class="filter-row" id="notify13-filters"><button class="filter-btn active" data-notify-filter="all">All</button><button class="filter-btn" data-notify-filter="unread">Unread</button><button class="filter-btn" data-notify-filter="observation">Observation</button><button class="filter-btn" data-notify-filter="risk">Risk</button><button class="filter-btn" data-notify-filter="shadow">Shadow</button><button class="filter-btn" data-notify-filter="automation">Automation</button><button class="filter-btn" data-notify-filter="execution">Execution</button><button class="filter-btn" data-notify-filter="integrity">Integrity</button><button class="filter-btn" data-notify-filter="connection">Connections</button><button class="filter-btn" data-notify-filter="ai">AI</button></div><div class="notify13-tools"><input id="notify13-search" class="positions-search" placeholder="Search wallet, token, signature, event ID, attempt ID, source…"><select id="events59-severity" class="wallet-sort"><option value="all">All Severity</option><option value="CRITICAL">Critical</option><option value="HIGH">High</option><option value="WARNING">Warning</option><option value="WATCH">Watch</option><option value="SUCCESS">Success</option><option value="INFO">Info</option></select><button class="ghost" id="notify13-read-all">Mark all read</button><button class="ghost" id="notify13-clear">Clear acknowledged</button></div></div>
+      <div class="events59-layout">
+        <section class="notify13-main events59-ledger"><div class="panel-head"><div><span class="panel-kicker">CHRONOLOGICAL EVIDENCE TIMELINE</span><h3>Operational Activity</h3></div><span class="count-pill" id="notify13-count">0</span></div><div id="notify13-events"></div></section>
+        <section class="events59-inspector" id="events59-inspector"><div class="position-detail-empty"><span>◎</span><b>Select an event</b><small>Inspect source subsystem, exact timestamps, identifiers, status semantics, metadata and safe handoffs.</small></div></section>
+        <aside class="notify13-side events59-side"><div class="intel-side-card"><div class="panel-head"><div><span class="panel-kicker">DELIVERY</span><h3>Ledger Behavior</h3></div></div><div id="notify13-delivery"></div></div><div class="intel-side-card"><div class="panel-head"><div><span class="panel-kicker">SYSTEM AUTHORITY</span><h3>Evidence Doctrine</h3></div></div><div class="events59-guide"><div><b>DETERMINISTIC</b><span>Risk and execution-safety states remain authoritative.</span></div><div><b>AI ADVISORY</b><span>AI events explain or recommend; they do not change state.</span></div><div><b>RECOVERY</b><span>Recovered/backfilled observation is visibly distinct from fresh live evidence.</span></div><div><b>ACCOUNTING</b><span>Operational events cannot inflate verified realized P&amp;L.</span></div></div></div></aside>
+      </div>
+    </section><section class="page assistant33-page assistant60-page" id="page-assistant">
+      <div class="assistant60-hero"><div><span class="hero-kicker">PHASE 60 · GOVERNED AI OPERATIONS WORKSPACE · PHASE 33 · GOVERNED OPERATOR LAYER</span><h2>CopyGuard AI Assistant</h2><p>One operator workspace for evidence-aware analysis, proposals, safe preparation, governed Padre actions, working memory and full assistant logic auditing. Conversation is flexible; authority is deterministic.</p></div><div class="assistant60-authority"><span>MAXIMUM AUTHORITY</span><strong>PRE-SUBMIT ONLY</strong><small>Final submit · Trusted promotion · risk override · config mutation remain outside assistant authority.</small></div></div>
+      <div class="assistant60-policy" id="assistant60-policy"><span><b>READ</b> ALLOWED</span><span><b>ANALYZE</b> ALLOWED</span><span><b>RECOMMEND</b> ALLOWED</span><span><b>PREPARE</b> CONFIRMATION</span><span><b>CONFIG</b> DENIED</span><span><b>LIVE EXECUTION</b> DENIED</span></div>
+      <div class="assistant60-health" id="assistant60-health"></div>
+      <div class="assistant60-layout">
+        <aside class="assistant60-sessions"><div class="assistant33-sidehead"><div><span>CONVERSATIONS</span><b>Operator Sessions</b></div><button id="assistant-new" title="New conversation">＋</button></div><div id="assistant-session-list" class="assistant33-session-list"></div><div class="assistant60-memory-preview"><div class="panel-head"><div><span class="panel-kicker">PHASE 46</span><h3>Working Memory</h3></div><span id="assistant60-memory-count">0</span></div><div id="assistant60-memory-mini"></div></div></aside>
+        <section class="assistant60-chat"><div class="assistant33-chathead"><div><span>ACTIVE CONVERSATION</span><b id="assistant-title">New conversation</b></div><div id="assistant-provider" class="assistant33-provider">LOCAL FALLBACK</div><small id="assistant-awareness-status" class="assistant33-awareness-status">PHASE 47 · AUDIT LOADING</small></div><div id="assistant-messages" class="assistant33-messages"></div><div id="assistant-permission-preview" class="assistant33-permission-preview">PHASE 35 · COMMAND ROUTER · Requests are classified before they reach the model.</div><form id="assistant-form" class="assistant33-composer"><textarea id="assistant-input" rows="2" maxlength="12000" placeholder="Ask about a wallet, token, trade decision, risk evidence, Shadow qualification, learning, portfolio or system state…" autocomplete="off"></textarea><button id="assistant-send" type="submit">Send</button></form><div class="assistant60-chat-boundary"><span>MODEL OUTPUT CANNOT ELEVATE PERMISSIONS</span><strong>Phase 26 deterministic risk + Phase 32 execution safety remain authoritative.</strong></div></section>
+        <aside class="assistant60-ops"><div class="assistant60-tabs" id="assistant60-tabs"><button class="active" data-a60-tab="actions">Actions</button><button data-a60-tab="memory">Memory</button><button data-a60-tab="audit">Audit</button></div><div id="assistant60-ops-content"></div></aside>
+      </div>
+      <section id="assistant-proposals" class="assistant36-proposals assistant60-hidden-compat"></section>
+    </section><section class="page settings14-page settings62-page" id="page-settings">
+      <div class="settings14-hero settings62-hero"><div><span class="hero-kicker">PHASE 62 · SECURITY · CONNECTIONS · RECOVERY</span><h2>Settings & Security Control Center</h2><p>Production controls for encrypted credentials, service diagnostics, automation limits, notification delivery, integrity, verified backups and protected destructive recovery.</p></div><div class="settings14-security settings62-security"><span>SECRET STORAGE</span><strong id="settings14-security-state">CHECKING…</strong><small id="settings14-security-sub">Loading OS encryption status</small></div></div>
+      <div class="settings62-health" id="settings62-health"></div>
+      <div class="settings14-tabs settings62-tabs" id="settings14-tabs"><button class="active" data-settings-tab="connections">Connections & Secrets</button><button data-settings-tab="risk">Risk & Automation</button><button data-settings-tab="notifications">Notifications</button><button data-settings-tab="data">Integrity & Recovery</button></div>
+      <div class="settings62-layout"><div id="settings14-content"></div><aside class="settings62-rail"><div class="settings62-rail-card"><span>SECURITY DOCTRINE</span><b>DETERMINISTIC SAFETY WINS</b><p>Settings may make execution stricter. They cannot waive Phase 26 hard blocks, Phase 31 degraded-mode gates, or Phase 32 execution safety.</p></div><div class="settings62-rail-card"><span>SECRET BOUNDARY</span><b>API KEYS EXCLUDED FROM BACKUPS</b><p>Credentials remain separate from portable operational backups. CopyGuard never needs to display stored secret values back to the UI.</p></div><div class="settings62-rail-card"><span>RECOVERY BOUNDARY</span><b>VERIFY BEFORE REPLACE</b><p>Backup restore validates the manifest/checksums before replacing live data. Reset Everything requires typed destructive confirmation.</p></div><div class="settings62-rail-card danger"><span>LIVE EXECUTION</span><b>NO SETTINGS OVERRIDE</b><p>Enabling automation is only one gate. Trusted profile, fresh observation, market health, deterministic risk and execution safety still apply.</p></div></aside></div>
+    </section>
+    <section class="page padre-page padre61-page" id="page-padre">
+      <div class="padre61-hero"><div><span class="hero-kicker">PHASE 61 · PRE-SUBMIT EXECUTION WORKSPACE</span><h2>Padre Terminal</h2><p>Dedicated execution surface with CopyGuard evidence and safety context around the embedded Padre session. Preparation, submission, settlement and verified outcome remain separate states.</p></div><div class="padre61-boundary"><span>FINAL SUBMIT AUTHORITY</span><strong>USER / PADRE</strong><small>CopyGuard preparation does not equal submission. Assistant governed actions stop pre-submit.</small></div></div>
+      <div class="padre61-statebar" id="padre61-statebar"></div>
+      <div class="padre61-layout">
+        <aside class="padre61-context"><div class="panel-head"><div><span class="panel-kicker">COPYGUARD CONTEXT</span><h3>Current Contract</h3></div></div><div id="padre61-token"></div><div class="padre61-section"><span>DETERMINISTIC RISK</span><div id="padre61-risk"></div></div><div class="padre61-section"><span>EXECUTION DOCTRINE</span><div class="padre61-doctrine"><b>PREPARED</b><small>No submission. No accounting commitment.</small><b>SUBMITTED_UNVERIFIED</b><small>Submission evidence only. Settlement not assumed.</small><b>SETTLED</b><small>Requires authoritative own-wallet evidence.</small><b>VERIFIED OUTCOME</b><small>Separate fully closed, source-verified accounting proof.</small></div></div></aside>
+        <div class="padre-shell padre61-terminal">
+          <div class="padre-toolbar"><div class="padre-brand"><span>⬡</span><div><b>Padre Terminal</b><small>Embedded workspace · persistent session</small></div></div><div class="padre-controls"><button id="padre-back" class="terminal-btn" title="Back">←</button><button id="padre-forward" class="terminal-btn" title="Forward">→</button><button id="padre-reload" class="terminal-btn" title="Reload">↻</button><button id="padre-home" class="terminal-btn home" title="Padre home">⬡</button></div><form id="padre-address-form" class="padre-address"><span id="padre-lock">●</span><input id="padre-address" autocomplete="off" spellcheck="false" value="https://trade.padre.gg" aria-label="Padre address or Solana token address"><button type="submit">GO</button></form><button id="padre-external" class="terminal-btn external" title="Open current page in browser">↗</button><div class="padre-status"><span id="padre-status-dot"></span><b id="padre-status-text">READY</b></div></div>
+          <div class="padre-quickbar padre61-quickbar"><span>PASTE A SOLANA CONTRACT TO OPEN THE EXACT TOKEN IN PADRE</span><strong>FINAL SUBMIT IS NOT A COPYGUARD PREPARATION STEP.</strong></div>
+          <div id="padre-host" class="padre-host"><div class="padre-loading"><span>⬡</span><b>Loading Padre Terminal…</b><small>Your Padre login is saved in its own persistent session.</small></div></div>
+        </div>
+        <aside class="padre61-safety"><div class="panel-head"><div><span class="panel-kicker">PHASE 32</span><h3>Execution Safety</h3></div><button class="ghost" id="padre61-refresh">Refresh</button></div><div id="padre61-safety"></div><div class="padre61-section"><span>RECENT EXECUTION STATES</span><div id="padre61-attempts"></div></div><div class="padre61-section"><span>GOVERNED ASSISTANT ACTIONS</span><div id="padre61-governed"></div></div><div class="padre61-redline"><b>AUTOMATED SELL</b><span>Fail-closed until authoritative own-wallet holding/fill evidence exists. The Padre workspace does not weaken this rule.</span></div></aside>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+<script src="app.js"></script>
+
+<!-- ══════════════════════════════════════════════════════════
+     TRUSTED CONFIG MODAL  (Phase 3)
+     Opens when "Make Trusted" is clicked on a wallet.
+     Wallet is NOT promoted until the user saves this form.
+══════════════════════════════════════════════════════════ -->
+<div class="tc-backdrop" id="tc-backdrop">
+  <div class="tc-modal" id="tc-modal">
+
+    <!-- Header -->
+    <div class="tc-head">
+      <div>
+        <div class="tc-kicker">TRUSTED AUTOMATION PROFILE</div>
+        <h2 class="tc-title">Configure Wallet</h2>
+        <div class="tc-wallet-name" id="tc-wallet-name">Loading…</div>
+      </div>
+      <button class="tc-close" id="tc-close">✕</button>
+    </div>
+
+    <!-- ── SIZING MODE ── -->
+    <div class="tc-section">
+      <div class="tc-section-title">Position Sizing</div>
+      <div class="tc-section-hint">How much SOL CopyGuard copies into each trade from this wallet</div>
+
+      <div class="tc-mode-grid" id="tc-mode-grid">
+        <button class="tc-mode active" data-mode="fixed">
+          <span class="tc-mode-icon">🔒</span>
+          <span class="tc-mode-name">Fixed</span>
+          <span class="tc-mode-desc">Always X SOL</span>
+        </button>
+        <button class="tc-mode" data-mode="percent_balance">
+          <span class="tc-mode-icon">%</span>
+          <span class="tc-mode-name">% Balance</span>
+          <span class="tc-mode-desc">X% of your SOL</span>
+        </button>
+        <button class="tc-mode" data-mode="ai_weighted">
+          <span class="tc-mode-icon">◇</span>
+          <span class="tc-mode-name">AI Weighted</span>
+          <span class="tc-mode-desc">Scale by confidence</span>
+        </button>
+        <button class="tc-mode" data-mode="kelly">
+          <span class="tc-mode-icon">◈</span>
+          <span class="tc-mode-name">Kelly</span>
+          <span class="tc-mode-desc">Math optimal</span>
+        </button>
+      </div>
+
+      <!-- Fixed -->
+      <div class="tc-fields" id="tc-fields-fixed">
+        <div class="tc-field">
+          <label>SOL per trade</label>
+          <div class="tc-input-row">
+            <input id="tc-fixed-sol" type="number" value="0.5" min="0.01" step="0.1" />
+            <span class="tc-unit">SOL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- % Balance -->
+      <div class="tc-fields" id="tc-fields-percent_balance" style="display:none">
+        <div class="tc-field">
+          <label>% of your SOL balance</label>
+          <div class="tc-input-row">
+            <input id="tc-balance-pct" type="number" value="5" min="0.1" max="50" step="0.5" />
+            <span class="tc-unit">%</span>
+          </div>
+          <small>e.g. 5% of 10 SOL = 0.5 SOL per trade</small>
+        </div>
+      </div>
+
+      <!-- AI Weighted -->
+      <div class="tc-fields" id="tc-fields-ai_weighted" style="display:none">
+        <div class="tc-field">
+          <label>Base size at 100% confidence</label>
+          <div class="tc-input-row">
+            <input id="tc-ai-base" type="number" value="0.5" min="0.01" step="0.1" />
+            <span class="tc-unit">SOL</span>
+          </div>
+        </div>
+        <div class="tc-field">
+          <label>Minimum AI confidence to trade</label>
+          <div class="tc-input-row">
+            <input id="tc-ai-min-conf" type="number" value="60" min="30" max="90" step="5" />
+            <span class="tc-unit">%</span>
+          </div>
+        </div>
+        <div class="tc-field tc-toggle-field">
+          <label>Skip if AI recommends SKIP</label>
+          <button class="tc-tog off" id="tc-require-ai" data-tog="tc-require-ai"><span class="tc-knob"></span></button>
+        </div>
+        <small class="tc-hint">90% confidence → 0.9 × base · 60% → 0.6 × base · below min → skip trade</small>
+      </div>
+
+      <!-- Kelly -->
+      <div class="tc-fields" id="tc-fields-kelly" style="display:none">
+        <div class="tc-field">
+          <label>Your total trading bankroll</label>
+          <div class="tc-input-row">
+            <input id="tc-kelly-bankroll" type="number" value="10" min="0.1" step="1" />
+            <span class="tc-unit">SOL</span>
+          </div>
+        </div>
+        <div class="tc-field">
+          <label>Win / loss ratio (avg win ÷ avg loss)</label>
+          <div class="tc-input-row">
+            <input id="tc-kelly-ratio" type="number" value="1.5" min="0.5" step="0.1" />
+            <span class="tc-unit">×</span>
+          </div>
+        </div>
+        <div class="tc-field">
+          <label>Kelly fraction (0.25 = conservative)</label>
+          <div class="tc-input-row">
+            <input id="tc-kelly-frac" type="number" value="0.25" min="0.05" max="1" step="0.05" />
+          </div>
+        </div>
+        <div class="tc-kelly-preview" id="tc-kelly-preview">Enter values above for a live size preview</div>
+      </div>
+
+      <!-- Cap — always shown -->
+      <div class="tc-field tc-field-cap">
+        <label>Hard cap per trade<small>Overrides calculated size if higher</small></label>
+        <div class="tc-input-row">
+          <input id="tc-max-sol" type="number" value="2" min="0.01" step="0.1" />
+          <span class="tc-unit">SOL max</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── EXIT STRATEGY ── -->
+    <div class="tc-section">
+      <div class="tc-section-title">Exit Strategy</div>
+      <div class="tc-section-hint">Set in Padre after each buy. Terminal enforces these even if CopyGuard is closed.</div>
+
+      <div class="tc-field tc-toggle-field">
+        <div>
+          <label>Take Profit</label>
+          <small>Auto-sell when up X%</small>
+        </div>
+        <button class="tc-tog off" id="tc-tp-tog" data-tog="tc-tp-tog" data-reveals="tc-tp-row"><span class="tc-knob"></span></button>
+      </div>
+      <div class="tc-indent" id="tc-tp-row" style="display:none">
+        <div class="tc-field">
+          <label>Sell at</label>
+          <div class="tc-input-row">
+            <input id="tc-tp-pct" type="number" value="150" min="10" step="10" />
+            <span class="tc-unit">% profit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc-field tc-toggle-field">
+        <div>
+          <label>Stop Loss</label>
+          <small>Auto-sell when down X%</small>
+        </div>
+        <button class="tc-tog off" id="tc-sl-tog" data-tog="tc-sl-tog" data-reveals="tc-sl-row"><span class="tc-knob"></span></button>
+      </div>
+      <div class="tc-indent" id="tc-sl-row" style="display:none">
+        <div class="tc-field tc-toggle-field">
+          <label>Trailing stop (follows price up)</label>
+          <button class="tc-tog off" id="tc-trail-tog" data-tog="tc-trail-tog"><span class="tc-knob"></span></button>
+        </div>
+        <div class="tc-field">
+          <label>Stop at</label>
+          <div class="tc-input-row">
+            <input id="tc-sl-pct" type="number" value="30" min="5" step="5" />
+            <span class="tc-unit">% loss</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DAILY LIMITS ── -->
+    <div class="tc-section">
+      <div class="tc-section-title">Daily Limits</div>
+      <div class="tc-section-hint">Wallet pauses for the day when either limit is hit. 0 = unlimited.</div>
+
+      <div class="tc-fields">
+        <div class="tc-field">
+          <label>Max trades per day</label>
+          <div class="tc-input-row">
+            <input id="tc-max-trades" type="number" value="0" min="0" step="1" />
+          </div>
+        </div>
+        <div class="tc-field">
+          <label>Max daily loss</label>
+          <div class="tc-input-row">
+            <input id="tc-max-loss" type="number" value="0" min="0" step="0.1" />
+            <span class="tc-unit">SOL</span>
+          </div>
+        </div>
+        <div class="tc-field">
+          <label>Max concurrent open positions</label>
+          <div class="tc-input-row">
+            <input id="tc-max-pos" type="number" value="3" min="1" step="1" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <div class="tc-foot">
+      <div class="tc-offline-note">
+        <span>💤</span>
+        <div><strong>Offline protection:</strong> After each buy, CopyGuard sets TP/SL directly in Padre's limit order system. Even if this app closes, Terminal's own automation protects the position.</div>
+      </div>
+      <div class="tc-actions">
+        <button class="tc-btn-cancel" id="tc-cancel">Cancel</button>
+        <button class="tc-btn-save" id="tc-save">↑ Promote to Trusted</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     FIRST LAUNCH WALKTHROUGH  (Phase 5)
+     Fires once on first boot. Re-openable from Settings.
+     8 steps: welcome (0) + 7 content steps
+══════════════════════════════════════════════════════════ -->
+<div class="wt-shell" id="wt-shell">
+
+  <!-- Step 0 — Welcome -->
+  <div class="wt-step active" id="wt-0">
+    <div class="wt-welcome">
+      <div class="wt-logo">CG</div>
+      <div class="wt-badge">COPYGUARD 3.4 · INTELLIGENCE LOGIC</div>
+      <h1 class="wt-welcome-h">Welcome to CopyGuard</h1>
+      <p class="wt-welcome-p">AI-powered copy trading intelligence for Padre Terminal.<br>Wallet monitoring, deterministic risk scoring, ghost qualification, and autonomous execution — all in one place.</p>
+      <div class="wt-feature-grid">
+        <div class="wt-feature"><span>◎</span><div><b>Watch &amp; Copy</b><small>Follow top wallets on-chain. Approve or auto-execute their trades.</small></div></div>
+        <div class="wt-feature"><span>◈</span><div><b>Phase 12 Risk Engine</b><small>Hard safety blocks that AI cannot override.</small></div></div>
+        <div class="wt-feature"><span>◌</span><div><b>Ghost Qualification</b><small>Paper-copy wallets before real capital is eligible.</small></div></div>
+        <div class="wt-feature"><span>✦</span><div><b>Early Bird Detector</b><small>Find wallets that repeatedly enter before big runs.</small></div></div>
+      </div>
+      <div class="wt-welcome-btns">
+        <button class="wt-primary" id="wt-start">📖 Yes, walk me through it</button>
+        <button class="wt-skip"    id="wt-skip">I know what I'm doing →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 1 — API Keys -->
+  <div class="wt-step" id="wt-1">
+    <div class="wt-content">
+      <div class="wt-step-meta"><span class="wt-step-num">1 / 7</span><span class="wt-step-tag">CONNECTIONS</span></div>
+      <div class="wt-step-icon">🔑</div>
+      <h2>Set Up Your API Keys</h2>
+      <p>Two keys unlock everything. You only do this once — they're stored encrypted on your machine.</p>
+      <div class="wt-cards">
+        <div class="wt-card">
+          <div class="wt-card-num">1</div>
+          <div>
+            <b>Helius API Key</b>
+            <small>Streams wallet transactions in real time. Free tier is enough to start.</small>
+            <a class="wt-link" id="wt-helius-link">helius.dev → Sign up → API Key</a>
+          </div>
+        </div>
+        <div class="wt-card">
+          <div class="wt-card-num">2</div>
+          <div>
+            <b>AI Provider Key</b>
+            <small>Analyzes every trade. Pick any one you already have.</small>
+            <div class="wt-pill-row">
+              <span class="wt-pill">Claude</span>
+              <span class="wt-pill">GPT-4o</span>
+              <span class="wt-pill">Gemini</span>
+              <span class="wt-pill">Grok</span>
+              <span class="wt-pill">Sonar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wt-callout">
+        <span>💡</span>
+        <span>After this walkthrough, open <strong>⚙ Settings → Connections</strong> to paste both keys. The green dot in the sidebar lights up once Helius connects.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2 — Adding Wallets -->
+  <div class="wt-step" id="wt-2">
+    <div class="wt-content">
+      <div class="wt-step-meta"><span class="wt-step-num">2 / 7</span><span class="wt-step-tag">WALLET MONITORING</span></div>
+      <div class="wt-step-icon">◎</div>
+      <h2>Add Wallets to Watch</h2>
+      <p>Find a wallet that trades well and paste their Solana address. CopyGuard watches them on-chain 24/7.</p>
+      <div class="wt-cards">
+        <div class="wt-card">
+          <div class="wt-card-num">1</div>
+          <div><b>Go to Wallets tab</b><small>Paste any Solana address (32–44 chars). Add a display label like "Alpha Whale" or "Degen Sniper."</small></div>
+        </div>
+        <div class="wt-card">
+          <div class="wt-card-num">2</div>
+          <div><b>New wallets start as <span class="wt-tier pending">Pending</span></b><small>Every trade they make hits your approval queue first. You decide before anything happens.</small></div>
+        </div>
+        <div class="wt-card">
+          <div class="wt-card-num">3</div>
+          <div><b>Optionally start <span class="wt-tier ghost">Ghost Mode</span></b><small>Paper-copy them first. After 30+ trades and 65%+ WR they qualify for live automation.</small></div>
+        </div>
+      </div>
+      <div class="wt-callout">
+        <span>◇</span>
+        <span>Don't know which wallets to follow? The <strong>◇ Intelligence</strong> tab auto-discovers wallets that appeared early on trending tokens. One click adds them.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3 — Approving Trades -->
+  <div class="wt-step" id="wt-3">
+    <div class="wt-content">
+      <div class="wt-step-meta"><span class="wt-step-num">3 / 7</span><span class="wt-step-tag">TRADE FEED</span></div>
+      <div class="wt-step-icon">◉</div>
+      <h2>Approving Trades</h2>
+      <p>When a Pending wallet trades, it enters your approval queue. You decide whether to copy it.</p>
+      <div class="wt-cards">
+        <div class="wt-card">
+          <div class="wt-card-num">1</div>
+          <div><b>Phase 12 Risk Score runs first</b><small>Deterministic checks: freeze/mint authority, liquidity, holder concentration, coordinated buys. Hard blocks cannot be overridden by AI.</small></div>
+        </div>
+        <div class="wt-card">
+          <div class="wt-card-num">2</div>
+          <div><b>AI gives a second opinion</b><small>Your chosen AI provider analyzes the trade in context and returns <strong>COPY · CAUTION · SKIP</strong> with reasoning. Advisory only.</small></div>
+        </div>
+        <div class="wt-card">
+          <div class="wt-card-num">3</div>
+          <div><b>You approve or reject</b><small>Approved trades open in Padre for final confirmation. CopyGuard never places a trade without your direct action or an explicit Trusted rule.</small></div>
+        </div>
+      </div>
+      <div class="wt-callout">
+        <span>⚡</span>
+        <span>Emergency Pause in the top toolbar instantly halts all Trusted automation with one click. The pause is active by default until you explicitly release it.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 4 — Research -->
+  <div class="wt-step" id="wt-4">
+    <div class="wt-content">
+      <div class="wt-step-meta"><span class="wt-step-num">4 / 7</span><span class="wt-step-tag">COPYCAT DETECTION</span></div>
+      <div class="wt-step-icon">⌕</div>
+      <h2>Research — Avoid Copycats</h2>
+      <p>On Solana there are often 4–5 fake versions of every coin that pumps. Buying the wrong one means losing everything.</p>
+      <div class="wt-cards">
+        <div class="wt-card">
+          <div class="wt-card-num">1</div>
+          <div><b>Search any ticker</b><small>Go to <strong>⌕ Research</strong> and type BONK, WIF, or any ticker. CopyGuard pulls every Solana token sharing that name.</small></div>
+        </div>
+        <div class="wt-card">
+          <div class="wt-card-num">2</div>
+          <div><b>0–100 legitimacy score</b><small>Each token is ranked by age, liquidity, DEX trust, and verified socials. The highest scorer is the likely original.</small></div>
+        </div>
+        <div class="wt-card">
+          <div class="wt-card-num">3</div>
+          <div><b>AI verdict</b><small>Your AI provider gives a <strong>SAFE · CAUTION · DANGER</strong> verdict, copycat count, and specific advice. One click opens in Padre.</small></div>
+        </div>
+      </div>
+      <div class="wt-callout">
+        <span>✦</span>
+        <span>The <strong>✦ Early Bird</strong> tab also flags wallets that bought real tokens AND their copycats — spray-and-pray buyers are filtered out automatically.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 5 — Trusted Promotion -->
+  <div class="wt-step" id="wt-5">
+    <div class="wt-content">
+      <div class="wt-step-meta"><span class="wt-step-num">5 / 7</span><span class="wt-step-tag">AUTOMATION</span></div>
+      <div class="wt-step-icon">⚡</div>
+      <h2>Promoting to Trusted</h2>
+      <p>Once a wallet earns it, promote it to Trusted. Trusted wallets execute automatically — even when CopyGuard is minimized.</p>
+      <div class="wt-cards">
+        <div class="wt-card">
+          <div class="wt-card-num">1</div>
+          <div><b>Promotion banner appears</b><small>When a wallet hits your performance thresholds (default: 5 trades, 60% WR), a banner fires in the Feed. It will not auto-promote.</small></div>
+        </div>
+        <div class="wt-card">
+          <div class="wt-card-num">2</div>
+          <div>
+            <b>Configure before it goes live</b>
+            <small>A config modal opens first. You set the sizing mode:</small>
+            <div class="wt-pill-row">
+              <span class="wt-pill">Fixed SOL</span>
+              <span class="wt-pill">% Balance</span>
+              <span class="wt-pill">AI-Weighted</span>
+              <span class="wt-pill">Kelly</span>
+            </div>
+          </div>
+        </div>
+        <div class="wt-card">
+          <div class="wt-card-num">3</div>
+          <div><b>TP/SL set in Padre after every buy</b><small>Take Profit and Stop Loss are injected into Padre's own limit order system. Even if CopyGuard closes, Terminal protects your position.</small></div>
+        </div>
+      </div>
+      <div class="wt-callout">
+        <span>◌</span>
+        <span>Prefer to test first? Use <strong>Ghost Mode</strong> — CopyGuard simulates the wallet's trades with slippage and fees, then qualifies it against configurable thresholds before any real capital is eligible.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 6 — Intelligence -->
+  <div class="wt-step" id="wt-6">
+    <div class="wt-content">
+      <div class="wt-step-meta"><span class="wt-step-num">6 / 7</span><span class="wt-step-tag">BACKGROUND INTELLIGENCE</span></div>
+      <div class="wt-step-icon">◇</div>
+      <h2>Intelligence — Always Running</h2>
+      <p>Three background engines run automatically. You don't need to do anything.</p>
+      <div class="wt-cards">
+        <div class="wt-card">
+          <div class="wt-card-num">🎯</div>
+          <div><b>Wallet Discovery (every 30 min)</b><small>Scans trending tokens on Solana. Surfaces wallets that appeared early on multiple big runs. One click adds them to your watchlist.</small></div>
+        </div>
+        <div class="wt-card">
+          <div class="wt-card-num">🏥</div>
+          <div><b>Health Monitor (every 5 min)</b><small>Tracks rolling win rate of every Trusted wallet. Consecutive losses or a collapsed win rate triggers an alert — and optionally auto-demotes the wallet back to Pending.</small></div>
+        </div>
+        <div class="wt-card">
+          <div class="wt-card-num">✦</div>
+          <div><b>Early Bird Scan (every hour)</b><small>Finds wallets with consistent early entry on tokens that ran 3x+. Scores timing, repeatability, run size, and contract precision. Spray-and-pray buyers are automatically filtered.</small></div>
+        </div>
+      </div>
+      <div class="wt-callout">
+        <span>🔗</span>
+        <span><strong>Bundle detection</strong> also runs on every trade: if two or more watched wallets buy the same token within 5 seconds, CopyGuard flags it as a possible coordinated pump before you copy in.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 7 — Checklist -->
+  <div class="wt-step" id="wt-7">
+    <div class="wt-content">
+      <div class="wt-step-meta"><span class="wt-step-num">7 / 7</span><span class="wt-step-tag">YOU'RE READY</span></div>
+      <div class="wt-step-icon">🚀</div>
+      <h2>Get Live in 10 Minutes</h2>
+      <p>Check these off and you're trading.</p>
+      <div class="wt-checklist" id="wt-checklist">
+        <label class="wt-check"><input type="checkbox" data-wt-check><span>Get a free Helius API key at <a class="wt-link" id="wt-helius-link-2">helius.dev</a></span></label>
+        <label class="wt-check"><input type="checkbox" data-wt-check><span>Get an AI key — Claude at <a class="wt-link" id="wt-anthropic-link">console.anthropic.com</a> or any provider you have</span></label>
+        <label class="wt-check"><input type="checkbox" data-wt-check><span>Open <strong>⚙ Settings → Connections</strong>, paste both keys, watch the green dot light up</span></label>
+        <label class="wt-check"><input type="checkbox" data-wt-check><span>Go to <strong>◎ Wallets</strong> and add your first Solana wallet address to watch</span></label>
+        <label class="wt-check"><input type="checkbox" data-wt-check><span>Open <strong>⬡ Padre Terminal</strong> and log in — your session is saved permanently</span></label>
+        <label class="wt-check"><input type="checkbox" data-wt-check><span>Try <strong>⌕ Research</strong> — search BONK to see copycat detection in action</span></label>
+      </div>
+      <div class="wt-progress-wrap">
+        <div class="wt-progress-bar"><div class="wt-progress-fill" id="wt-progress-fill"></div></div>
+        <span class="wt-progress-label" id="wt-progress-label">0 / 6 complete</span>
+      </div>
+      <div class="wt-done-note" id="wt-done-note" style="display:none">
+        <span>✅</span> All set! Reopen this walkthrough anytime from <strong>⚙ Settings → Data &amp; Recovery → Show Walkthrough</strong>
+      </div>
+      <button class="wt-primary wt-finish" id="wt-finish">Start Trading →</button>
+    </div>
+  </div>
+
+  <!-- Nav footer (steps 1–7) -->
+  <div class="wt-nav" id="wt-nav">
+    <button class="wt-back" id="wt-back" disabled>← Back</button>
+    <div class="wt-dots" id="wt-dots"></div>
+    <button class="wt-next" id="wt-next">Next →</button>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     KEYBOARD SHORTCUT HELP OVERLAY  (Phase 6)
+══════════════════════════════════════════════════════════ -->
+<div class="ks-overlay" id="ks-overlay">
+  <div class="ks-card">
+    <div class="ks-head">
+      <span class="ks-title">Keyboard Shortcuts</span>
+      <button class="ks-close" id="ks-close">✕</button>
+    </div>
+    <div class="ks-body">
+      <div class="ks-section">
+        <div class="ks-section-title">Trade Feed</div>
+        <div class="ks-row"><kbd>A</kbd><span>Copy / approve top pending trade</span></div>
+        <div class="ks-row"><kbd>R</kbd><span>Skip / reject top pending trade</span></div>
+      </div>
+      <div class="ks-section">
+        <div class="ks-section-title">Navigation</div>
+        <div class="ks-row"><kbd>F</kbd><span>Live Feed</span></div>
+        <div class="ks-row"><kbd>W</kbd><span>Wallets</span></div>
+        <div class="ks-row"><kbd>P</kbd><span>Padre Terminal</span></div>
+        <div class="ks-row"><kbd>/</kbd><span>Research</span></div>
+        <div class="ks-row"><kbd>E</kbd><span>Early Bird</span></div>
+        <div class="ks-row"><kbd>G</kbd><span>Ghost Mode</span></div>
+        <div class="ks-row"><kbd>L</kbd><span>Leaderboard</span></div>
+        <div class="ks-row"><kbd>I</kbd><span>Intelligence</span></div>
+      </div>
+      <div class="ks-section">
+        <div class="ks-section-title">Global</div>
+        <div class="ks-row"><kbd>?</kbd><span>Show / hide this overlay</span></div>
+        <div class="ks-row"><kbd>Esc</kbd><span>Close modal or this overlay</span></div>
+      </div>
+    </div>
+    <div class="ks-foot">Shortcuts are disabled while typing in a text field.</div>
+  </div>
+</div>
+
+
+<div class="command-palette-backdrop" id="command-palette-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Workspace quick switch">
+  <div class="command-palette" role="dialog" aria-modal="true" aria-label="Quick workspace switcher">
+    <div class="command-search"><span>⌕</span><input id="command-search" autocomplete="off" placeholder="Jump to a workspace…" /><kbd>ESC</kbd></div>
+    <div class="command-caption"><span>WORKSPACES</span><small>Use ↑ ↓ and Enter</small></div>
+    <div class="command-results" id="command-results"></div>
+    <div class="command-footer"><span><kbd>Ctrl</kbd><kbd>K</kbd> open</span><span><kbd>1</kbd>–<kbd>9</kbd> quick navigation</span></div>
+  </div>
+</div>
+</body>
+</html>
